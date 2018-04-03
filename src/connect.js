@@ -3,12 +3,22 @@ function connect(mapStateToProps, mapDispatchToProps) {
   return function(WrappedComponent) {
     // will return container component
     return class ANONcontainer extends React.Component {
+      // subscribe to the store updates
+      componentDidMount() {
+        this.unsubscribe = store.subscribe(this.handleChange.bind(this))
+      }
+      handleChange() {
+        this.forceUpdate()
+      }
       render() {
         return <WrappedComponent 
           {...this.props} 
           {...mapStateToProps(store.getState(), this.props)}
           {...mapDispatchToProps(store.dispatch, this.props)}
-          />
+        />
+      }
+      componentWillUnmount() {
+        this.unsubscribe()
       }
     }
   };
