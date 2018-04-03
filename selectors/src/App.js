@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import SlideShow from './components/SlideShow';
 import { login } from './actions/auth';
 import { fetchRooms } from './actions/rooms';
-import  reducer from './reducers';
-import { selectUserName } from './reducers/auth';
+import  { selectUserName } from './reducers';
 import logo from './logo.png';
 import './App.css';
 
@@ -38,7 +37,7 @@ const mapStateToProps = (state) => {
 
   return {
     isFetching,
-    userName: selectUserName(state.auth),
+    userName: selectUserName(state),
   };
 };
 
