@@ -1,0 +1,10 @@
+{
+  "name": "miniredux",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ultrox <crashxx@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react-redux": "^5.0.7"
+  }
+}
