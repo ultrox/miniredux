@@ -15,15 +15,14 @@ class App extends Component {
   }
 
   render() {
-    const { isFetching, name } = this.props;
-    console.log(this.props, 'props')
+    const { isFetching, userName } = this.props;
     if (isFetching || isFetching === undefined) return <div className="loader" />;
     return (
       <div className="App">
         <div className="main">
           <img src={logo} width={250} alt="Redux Hotel" />
           <h1>Your Reservation</h1>
-          <p>Name: {name}</p>
+          <p>Name: {userName}</p>
         </div>
         <SlideShow />
       </div>
@@ -35,10 +34,22 @@ class App extends Component {
 const mapStateToProps = (state) => {
   const { auth, rooms } = state;
   const isFetching = auth.isFetching || rooms.isFetching;
-  const name = auth.user.firstName;
+  const user = auth.user;
+
+  let userTitle;
+
+  if( user.gender === "Male" ) {
+    userTitle = "Mr."
+  } else if ( user.maritalStatus === "Married" ) {
+    userTitle = "Mrs."
+  } else {
+    userTitle = "Miss."
+  }
+
+  const userName = `${userTitle} ${user.firstName} ${user.lastName}`
   return {
     isFetching,
-    name
+    userName
   };
 };
 
