@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import SlideShow from './components/SlideShow';
 import { login } from './actions/auth';
 import { fetchRooms } from './actions/rooms';
-import reducer from './reducers';
+import  reducer from './reducers';
+import { selectUserName } from './reducers/auth';
 import logo from './logo.png';
 import './App.css';
 
@@ -30,26 +31,14 @@ class App extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   const { auth, rooms } = state;
   const isFetching = auth.isFetching || rooms.isFetching;
-  const user = auth.user;
 
-  let userTitle;
 
-  if( user.gender === "Male" ) {
-    userTitle = "Mr."
-  } else if ( user.maritalStatus === "Married" ) {
-    userTitle = "Mrs."
-  } else {
-    userTitle = "Miss."
-  }
-
-  const userName = `${userTitle} ${user.firstName} ${user.lastName}`
   return {
     isFetching,
-    userName
+    userName: selectUserName(state.auth),
   };
 };
 
