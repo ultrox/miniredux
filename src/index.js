@@ -4,5 +4,9 @@ function createStore(reducer, state ) {
 
   return {
     getState: () => currentState,
+    dispatch: action => {
+      currentState = currentReducer(currentState, action)
+      return action
+    }
   }
 }
